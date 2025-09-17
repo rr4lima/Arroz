@@ -25,3 +25,15 @@ select * from usuario;
 
 update usuario set usuario = 'Kauani' where id = 2;
 delete from tb_usuarioss where id_usuario = 1;
+
+# *Informações extras ⋅˚₊‧ ୨୧ ‧₊˚ ⋅*:
+
+User: **root**;
+Senha: **root**;
+
+**Driver de uso**: com.mysql.jdbc.Driver;
+**Url de uso**: jdbc:mysql://localhost:3306/RevisaoBanco;
+**Tipo de banco**: SGDB;
+
+─── ⋆⋅☆⋅⋆ ──
+

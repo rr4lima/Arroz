@@ -1,4 +1,4 @@
-# *Banco de dados*: 
+# *Banco de dados ૮₍ ˃ ⤙ ˂ ₎ა*: 
 
 create database RevisaoBanco;
 use RevisaoBanco;
@@ -32,8 +32,9 @@ User: **root**;
 Senha: **root**;
 
 **Driver de uso**: com.mysql.jdbc.Driver;
+
 **Url de uso**: jdbc:mysql://localhost:3306/RevisaoBanco;
+
 **Tipo de banco**: SGDB;
 
-─── ⋆⋅☆⋅⋆ ──
 

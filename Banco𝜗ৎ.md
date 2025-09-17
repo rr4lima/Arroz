@@ -32,7 +32,6 @@ User: **root**;
 Senha: **root**;
 
 **Driver de uso**: com.mysql.jdbc.Driver;
-
 **Url de uso**: jdbc:mysql://localhost:3306/RevisaoBanco;
 
 **Tipo de banco**: SGDB;

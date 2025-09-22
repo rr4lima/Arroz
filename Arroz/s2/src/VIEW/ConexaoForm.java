@@ -26,7 +26,7 @@ public class ConexaoForm extends javax.swing.JFrame {
       
 
         if (conexao != null) {
-            iconImg.setIcon(new ImageIcon(getClass().getResource("/VIEW/branco.png")));
+            iconImg.setIcon(new ImageIcon(getClass().getResource("/VIEW/vermelho.png")));
         } else {
             iconImg.setIcon(new ImageIcon(getClass().getResource("/VIEW/partido.png")));
         }
@@ -48,11 +48,6 @@ public class ConexaoForm extends javax.swing.JFrame {
         txtSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         iconImg = new javax.swing.JLabel();
-        imgAdd = new javax.swing.JLabel();
-        imgRemov = new javax.swing.JLabel();
-        imgLimpar = new javax.swing.JLabel();
-        imgEditar = new javax.swing.JLabel();
-        imgExcluir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Banco de Dados");
@@ -76,16 +71,6 @@ public class ConexaoForm extends javax.swing.JFrame {
 
         iconImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/branco.png"))); // NOI18N
 
-        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/adicionar.png"))); // NOI18N
-
-        imgRemov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/remover.png"))); // NOI18N
-
-        imgLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/limpar.png"))); // NOI18N
-
-        imgEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/editar.png"))); // NOI18N
-
-        imgExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/excluir.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,33 +78,19 @@ public class ConexaoForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(txtSenha))
-                        .addContainerGap(163, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(iconImg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLogin)
-                        .addGap(143, 143, 143))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(imgAdd)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(txtSenha))
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(iconImg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imgRemov)
-                .addGap(18, 18, 18)
-                .addComponent(imgLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imgEditar)
-                .addGap(18, 18, 18)
-                .addComponent(imgExcluir)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(btnLogin)
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,18 +103,11 @@ public class ConexaoForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLogin)
-                    .addComponent(iconImg))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imgAdd)
-                    .addComponent(imgRemov)
-                    .addComponent(imgLimpar)
-                    .addComponent(imgEditar)
-                    .addComponent(imgExcluir, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iconImg, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -197,11 +161,6 @@ public class ConexaoForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel iconImg;
-    private javax.swing.JLabel imgAdd;
-    private javax.swing.JLabel imgEditar;
-    private javax.swing.JLabel imgExcluir;
-    private javax.swing.JLabel imgLimpar;
-    private javax.swing.JLabel imgRemov;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtLogin;

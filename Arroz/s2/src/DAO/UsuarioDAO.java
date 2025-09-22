@@ -2,7 +2,7 @@ package DAO;
 
 import DTO.UsuarioDTO;
 import VIEW.UsuarioForm;
-import VIEW.TelaPrincipal;
+import VIEW.TelaPrincipalForm;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,18 +33,18 @@ public class UsuarioDAO {
                 System.out.println(perfil);
 
                 if (perfil.equals("admin")) {
-                    TelaPrincipal pr = new TelaPrincipal();
+                    TelaPrincipalForm pr = new TelaPrincipalForm();
                     pr.setVisible(true);
-                    TelaPrincipal.MenuRel.setEnabled(true);
-                    TelaPrincipal.subMenuUsuarios.setEnabled(true);
-                    TelaPrincipal.lblUsuarioPrincipal.setText(rs.getString(2));
-                    TelaPrincipal.lblUsuarioPrincipal.setForeground(Color.RED);
+                    TelaPrincipalForm.menuCadastrar.setEnabled(true);
+                    TelaPrincipalForm.subMenuUsuarios.setEnabled(true);
+                    TelaPrincipalForm.lblUsuario.setText(rs.getString(2));
+                    TelaPrincipalForm.lblUsuario.setForeground(Color.RED);
                     conexao.close();
                 } else {
-                    TelaPrincipal principal = new TelaPrincipal();
+                    TelaPrincipalForm principal = new TelaPrincipalForm();
                     principal.setVisible(true);
-                    principal.lblUsuarioPrincipal.setText(rs.getString(2));
-                    TelaPrincipal.lblUsuarioPrincipal.setForeground(Color.BLUE);
+                    principal.lblUsuario.setText(rs.getString(2));
+                    TelaPrincipalForm.lblUsuario.setForeground(Color.BLUE);
                     conexao.close();
 
                 }
@@ -88,29 +88,27 @@ public class UsuarioDAO {
     }
 
     public void pesquisar(UsuarioDTO objUsuarioDTO) {
-        String sql = "SELECT * FROM tb_usuarios WHERE id_usuario = ?";
+        String sql = "SELECT * FROM tb_usuario WHERE id_usuario = ?";
         Connection conexao = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            // Conecta ao banco
             conexao = ConexaoDAO.conector();
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, objUsuarioDTO.getId_usuario());
             rs = pst.executeQuery();
 
             DefaultTableModel modelo = (DefaultTableModel) UsuarioForm.TbUsuarios.getModel();
-            modelo.setRowCount(0); 
+            modelo.setRowCount(0);
 
-            // Preenche a tabela
             if (rs.next()) {
                 modelo.addRow(new Object[]{
                     rs.getInt("id_usuario"),
-                    rs.getString("nome_usuario"),
-                    rs.getString("login_usuario"),
-                    rs.getString("senha_usuario"),
-                    rs.getString("perfil_usuario")
+                    rs.getString("usuario"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("perfil")
                 });
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
@@ -137,7 +135,7 @@ public class UsuarioDAO {
     }
 
     public void PesquisaAuto() {
-        String sql = "select * from tb_usuarioss";
+        String sql = "select * from tb_usuario";
         conexao = ConexaoDAO.conector();
 
         try {
@@ -161,7 +159,7 @@ public class UsuarioDAO {
     }
 
     public void deletar(UsuarioDTO objUsuarioDTO) {
-        String sql = "delete from tb_usuarios where id_usuario = ?";
+        String sql = "delete from tb_usuario where id_usuario = ?";
         conexao = ConexaoDAO.conector();
 
         try {
@@ -178,6 +176,28 @@ public class UsuarioDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " Método deletar " + e);
 
+        }
+    }
+
+    public void editar(UsuarioDTO objUsuarioDTO) {
+        String sql = "update tb_usuario set usuario = ?, login = ?, senha = ?, perfil = ? where id_usuario = ?";
+        conexao = ConexaoDAO.conector();
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(5, objUsuarioDTO.getId_usuario());
+            pst.setString(4, objUsuarioDTO.getPerfil_usuario());
+            pst.setString(3, objUsuarioDTO.getLogin_usuario());
+            pst.setString(2, objUsuarioDTO.getSenha_usuario());
+            pst.setString(1, objUsuarioDTO.getNome_usuario());
+            int add = pst.executeUpdate();
+            if (add > 0) {
+                JOptionPane.showMessageDialog(null, "Usuário editado com sucesso!");
+                PesquisaAuto();
+                conexao.close();
+                limparCampos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, " Método editar " + e);
         }
     }
 

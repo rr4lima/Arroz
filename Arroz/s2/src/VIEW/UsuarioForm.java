@@ -5,15 +5,18 @@
  */
 package VIEW;
 
+import DAO.UsuarioDAO;
+import DTO.UsuarioDTO;
+
 /**
  *
  * @author aluno.saolucas
  */
-public class UsuarioForm extends javax.swing.JFrame {
+public class UsuarioForm extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form UsuarioForm
-     */
+    UsuarioDAO us = new UsuarioDAO();
+    UsuarioDTO ua = new UsuarioDTO();
+
     public UsuarioForm() {
         initComponents();
     }
@@ -27,11 +30,9 @@ public class UsuarioForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         imgAdd1 = new javax.swing.JLabel();
-        imgRemov1 = new javax.swing.JLabel();
         imgLimpar1 = new javax.swing.JLabel();
         imgEditar1 = new javax.swing.JLabel();
         imgExcluir1 = new javax.swing.JLabel();
-        btnInserir = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtLogin = new javax.swing.JTextField();
@@ -39,6 +40,7 @@ public class UsuarioForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TbUsuarios = new javax.swing.JTable();
         cboPerfilUsu = new javax.swing.JComboBox<>();
+        imgProcurar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,16 +53,32 @@ public class UsuarioForm extends javax.swing.JFrame {
         jLabel4.setText("Senha:");
 
         imgAdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/adicionar.png"))); // NOI18N
-
-        imgRemov1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/remover.png"))); // NOI18N
+        imgAdd1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgAdd1MousePressed(evt);
+            }
+        });
 
         imgLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/limpar.png"))); // NOI18N
+        imgLimpar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgLimpar1MousePressed(evt);
+            }
+        });
 
         imgEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/editar.png"))); // NOI18N
+        imgEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgEditar1MousePressed(evt);
+            }
+        });
 
         imgExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/excluir.png"))); // NOI18N
-
-        btnInserir.setText("Inserir Usuario");
+        imgExcluir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgExcluir1MousePressed(evt);
+            }
+        });
 
         TbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,32 +108,25 @@ public class UsuarioForm extends javax.swing.JFrame {
             }
         });
 
+        imgProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/procurar.png"))); // NOI18N
+        imgProcurar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgProcurarMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnInserir)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imgAdd1)
-                        .addGap(18, 18, 18)
-                        .addComponent(imgRemov1)
-                        .addGap(12, 12, 12)
-                        .addComponent(imgLimpar1)
-                        .addGap(18, 18, 18)
-                        .addComponent(imgEditar1)))
-                .addGap(18, 18, 18)
-                .addComponent(imgExcluir1)
-                .addGap(159, 159, 159))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(cboPerfilUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(cboPerfilUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -128,8 +139,19 @@ public class UsuarioForm extends javax.swing.JFrame {
                             .addComponent(txtNome)
                             .addComponent(txtSenha)
                             .addComponent(txtLogin)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(imgAdd1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imgLimpar1)
+                        .addGap(12, 12, 12)
+                        .addComponent(imgEditar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imgExcluir1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imgProcurar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,58 +172,76 @@ public class UsuarioForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(35, 35, 35)
-                .addComponent(btnInserir)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(imgExcluir1)
                     .addComponent(imgEditar1)
                     .addComponent(imgLimpar1)
-                    .addComponent(imgRemov1)
-                    .addComponent(imgAdd1))
+                    .addComponent(imgAdd1)
+                    .addComponent(imgProcurar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(cboPerfilUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(cboPerfilUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
  private void btnAdcMousePressed(java.awt.event.MouseEvent evt) {
-        usu.setId_usuario(Integer.parseInt(txtId.getText()));
+
+    }
+
+
+    private void cboPerfilUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPerfilUsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboPerfilUsuActionPerformed
+
+    private void imgExcluir1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgExcluir1MousePressed
+        UsuarioDTO DTOedit = new UsuarioDTO();
+        DTOedit.setId_usuario(Integer.parseInt(txtId.getText()));
+        DTOedit.setLogin_usuario(txtLogin.getText());
+        DTOedit.setNome_usuario(txtNome.getText());
+        DTOedit.setSenha_usuario(txtSenha.getText());
+
+        UsuarioDAO DAOedit = new UsuarioDAO();
+        DAOedit.deletar(DTOedit);
+    }//GEN-LAST:event_imgExcluir1MousePressed
+
+    private void imgProcurarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgProcurarMousePressed
+        us.PesquisaAuto();
+    }//GEN-LAST:event_imgProcurarMousePressed
+
+    private void imgEditar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgEditar1MousePressed
+        UsuarioDTO DTOedit = new UsuarioDTO();
+        DTOedit.setId_usuario(Integer.parseInt(txtId.getText()));
+        DTOedit.setLogin_usuario(txtLogin.getText());
+        DTOedit.setNome_usuario(txtNome.getText());
+        DTOedit.setSenha_usuario(txtSenha.getText());
+
+        UsuarioDAO DAOedit = new UsuarioDAO();
+        DAOedit.editar(DTOedit);
+
+
+    }//GEN-LAST:event_imgEditar1MousePressed
+
+    private void imgLimpar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLimpar1MousePressed
+        us.limparCampos();
+    }//GEN-LAST:event_imgLimpar1MousePressed
+
+    private void imgAdd1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAdd1MousePressed
+        ua.setId_usuario(Integer.parseInt(txtId.getText()));
         ua.setNome_usuario(txtNome.getText());
         ua.setLogin_usuario(txtLogin.getText());
         ua.setSenha_usuario(txtSenha.getText());
         ua.setPerfil_usuario((String) cboPerfilUsu.getSelectedItem());
 
         us.inserirUsuario(ua);
-
-    }
-
-    private void btnLimparMousePressed(java.awt.event.MouseEvent evt) {
-        us.limparCampos();
-    }
-
-    private void btnListarMousePressed(java.awt.event.MouseEvent evt) {
-        us.PesquisaAuto();
-    }
-
-    private void btnEditarMousePressed(java.awt.event.MouseEvent evt) {
-        us.pesquisar(ua);
-    }
-
-    private void btnExcluirMousePressed(java.awt.event.MouseEvent evt) {
-        us.deletar(ua);
-    }
-
-    private void cboPerfilUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPerfilUsuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboPerfilUsuActionPerformed
+    }//GEN-LAST:event_imgAdd1MousePressed
 
     /**
      * @param args the command line arguments
@@ -240,13 +280,12 @@ public class UsuarioForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TbUsuarios;
-    private javax.swing.JButton btnInserir;
     private javax.swing.JComboBox<String> cboPerfilUsu;
     private javax.swing.JLabel imgAdd1;
     private javax.swing.JLabel imgEditar1;
     private javax.swing.JLabel imgExcluir1;
     private javax.swing.JLabel imgLimpar1;
-    private javax.swing.JLabel imgRemov1;
+    private javax.swing.JLabel imgProcurar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
